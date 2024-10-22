@@ -1,0 +1,22 @@
+{
+  "name": "curso-express",
+  "version": "1.0.0",
+  "description": "curso express ",
+  "main": "1,.http.js",
+  "scripts": {
+    "test": "index.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "first api "
+  },
+  "keywords": [
+    "first",
+    "api"
+  ],
+  "author": "michael moncayo",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "standard": "^17.1.2"
+  }
+}
