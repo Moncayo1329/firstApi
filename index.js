@@ -31,6 +31,7 @@ const processRequest = (req, res) => {
                         res.setHeader('Content-Type', 'image/jpeg');
                         res.end(data);
                     }
+                    
                 });
             }
         });
