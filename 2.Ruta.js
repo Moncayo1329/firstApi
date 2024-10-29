@@ -21,7 +21,16 @@ return res.end('<h1>404</h1>')
 
 }
 
-case 'POST':
+case 'POST': 
+switch (url) {
+
+case'/pokemon/':
+ let body = ''
+ 
+
+ 
+
+}
 
 }
 

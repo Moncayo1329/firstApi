@@ -1,49 +1,57 @@
-const http = require('node:http');
-const fs = require('node:fs');
-const desiredPort = process.env.PORT ?? 1234;
+const http = require('node:http')
+
+const dittoJSON  = require ('./pokemon/ditto.json')
 
 const processRequest = (req, res) => {
-    if (req.url === '/') {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/html; charset=utf-8'); // Incluye charset en el Content-Type
-        res.end('Bienvenido a mi pagina de inicio');
-    } else if (req.url === '/contacto') {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        res.end('<h1>Contacto</h1>');
-    } else if (req.url === '/imagen-super-bonita.jpg') {
-        // Verificamos que el archivo existe antes de intentar leerlo
-        fs.access('./image.jpg', fs.constants.F_OK, (err) => {
-            if (err) {
-                // Si el archivo no existe, devolvemos un 404
-                res.statusCode = 404;
-                res.setHeader('Content-Type', 'text/html; charset=utf-8');
-                res.end('<h1>404 - Imagen no encontrada</h1>');
-            } else {
-                // Si el archivo existe, lo leemos y lo enviamos como respuesta
-                fs.readFile('./image.jpg', (err, data) => {
-                    if (err) {
-                        res.statusCode = 500;
-                        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-                        res.end('<h1>500 - Error interno del servidor</h1>');
-                    } else {
-                        res.statusCode = 200;
-                        res.setHeader('Content-Type', 'image/jpeg');
-                        res.end(data);
-                    }
-                    
-                });
-            }
-        });
-    } else {
-        res.statusCode = 404;
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        res.end('<h1>404 - Página no encontrada</h1>');
-    }
-};
 
-// Iniciamos el servidor en el puerto especificado
-const server = http.createServer(processRequest);
-server.listen(desiredPort, () => {
-    console.log(`Servidor escuchando en http://localhost:${desiredPort}`);
-});
+const { method , url } = req 
+
+switch (method) {
+case 'GET':
+switch (url) {
+case '/pokemon/ditto':
+res.setHeader('Content-Type', 'application/json; charset=utf-8')
+return res.end(JSON.stringify(dittoJSON))
+default: 
+res.statusCode = 404
+res.setHeader('Content-type', 'text/html; charset=utf-8')
+return res.end('<h1>404</h1>')
+
+
+
+}
+
+case 'POST': 
+switch (url) {
+case'/pokemon/':
+{
+
+const body = ''
+break
+
+}
+
+ 
+
+default: 
+res.statusCode = 404
+res.setHeader('Content-type', 'text/plain; charset=utf-8')
+return res.end('<h1>404 not found</h1>')
+
+ 
+
+}
+
+}
+
+}
+
+const server = http.createServer(processRequest) 
+
+server.listen(1234,() => {
+
+console.log('server listening on port http://localhost:1234')
+
+
+
+})
